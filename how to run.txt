@@ -1,0 +1,56 @@
+Windows PowerShell quick guide
+
+1) Setup once
+- Create & activate venv, install deps
+  python -m venv .venv
+  . .venv\Scripts\Activate.ps1
+  pip install -r requirements.txt
+
+2) Set environment variables (per session)
+- Use ONLY the myshopify domain (no https)
+  $env:SHOPIFY_STORE_DOMAIN = "your-store.myshopify.com"
+  $env:SHOPIFY_ADMIN_ACCESS_TOKEN = "shpat_XXXXXXXXXXXXXXXX"
+  $env:SHOPIFY_API_VERSION = "2025-07"
+  $env:TARGET_LANGUAGE = "en"   # or en-GB if that’s your published English
+
+3) Fetch products
+- All products → JSON/CSV in exports/
+  python .\scripts\fetch_products.py all
+
+- Single product by handle/id → files in exports/
+  python .\scripts\fetch_products.py single --handle your-handle
+  python .\scripts\fetch_products.py single --id 123456789
+
+- Products by tag → files in exports/
+  python .\scripts\fetch_products.py tag --name "tagname"
+
+- Collection products → files in exports/
+  python .\scripts\fetch_products.py collection --handle my-collection
+  python .\scripts\fetch_products.py collection --title "My Collection"
+
+4) Edit English
+- Open exports\products_with_lang.csv or exports\single_product_with_lang.csv in Excel
+- Fill title_en and descriptionHtml_en
+- Save as CSV (UTF-8)
+- Or edit the JSON equivalents directly
+
+5) Optional: convert formats
+- JSON → XLSX
+  python .\scripts\json_to_xlsx.py .\exports\single_product_with_lang.json .\exports\single_product_with_lang.xlsx
+
+6) Upload translations to Shopify
+- From JSON or CSV
+  python .\scripts\register_translations.py .\exports\single_product_with_lang.json
+  python .\scripts\register_translations.py .\exports\single_product_with_lang.csv
+
+Notes
+- Domain must be like jafarshop.myshopify.com (no https, no admin URL)
+- Token needs read_products to fetch, write_translations to upload
+- Script auto-fetches digests required by Shopify before registering
+- If your storefront English is en-GB (or another), set TARGET_LANGUAGE accordingly and upload again
+
+Troubleshooting
+- 401 Unauthorized: wrong domain or token; re-check env vars
+- DNS error resolving "https": SHOPIFY_STORE_DOMAIN contains a full URL; set only myshopify domain
+- Not seeing English on storefront: ensure product is published and English is added/published in Settings → Languages
+- Translate & Adapt: you can view registered translations in the app under Products → English
