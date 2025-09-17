@@ -2,7 +2,7 @@
 
 A comprehensive Python utility for exporting Shopify products and preparing them for translation. This tool fetches product data from Shopify Admin GraphQL API, adds language markers, and exports results in multiple formats (JSON, CSV, XLSX) for easy translation workflow.
 
-## 🚀 Features
+## Features
 
 - **Product Export**: Fetch all products or specific products by handle, ID, or tag
 - **Multi-format Export**: Export to JSON, CSV, and XLSX formats
@@ -11,14 +11,14 @@ A comprehensive Python utility for exporting Shopify products and preparing them
 - **Collection Support**: Export products from specific collections
 - **Translation Upload**: Upload translated content back to Shopify
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.9 or higher
 - Shopify Admin API access token with appropriate scopes:
   - `read_products` - to fetch product data
   - `write_translations` - to upload translations
 
-## 🛠️ Installation
+##  Installation
 
 1. **Clone the repository**
    ```bash
@@ -50,7 +50,7 @@ A comprehensive Python utility for exporting Shopify products and preparing them
    # Edit .env with your Shopify credentials
    ```
 
-## ⚙️ Configuration
+## ⚙ Configuration
 
 Create a `.env` file in the project root with your Shopify credentials:
 
@@ -165,19 +165,11 @@ The tool generates several output files in the `exports/` directory:
 - Ensure the product is published
 - Check that the target language is added and published in Shopify Settings → Languages
 
-## 🤝 Contributing
-
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
 
 - Built for Shopify merchants who need efficient product translation workflows
 - Uses Shopify Admin GraphQL API for optimal performance
